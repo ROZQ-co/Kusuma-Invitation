@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Trimono & Puji</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
 
 <style>
 html{
@@ -20,15 +21,18 @@ color:#fff;
 overflow-x:hidden;
 }
 
+/* BACKGROUND */
 body::before{
 content:'';
 position:fixed;
 width:100%;
 height:100%;
-background:url('bg.jpg') center/cover;
+background:url('bg.jpg') center/cover no-repeat;
 z-index:-2;
+filter:brightness(0.7);
 }
 
+/* OVERLAY */
 .overlay{
 position:absolute;
 width:100%;
@@ -39,6 +43,7 @@ left:0;
 z-index:-1;
 }
 
+/* SECTION */
 section{
 height:100vh;
 scroll-snap-align:start;
@@ -51,17 +56,63 @@ padding:20px;
 position:relative;
 }
 
+/* ANIMASI */
 .fade{
 opacity:0;
-transform:translateY(40px);
-transition:1s;
+transform:translateY(40px) scale(0.95);
+transition:1s ease;
 }
 
 .fade.show{
 opacity:1;
-transform:translateY(0);
+transform:translateY(0) scale(1);
 }
 
+/* FONT NAMA */
+.nama{
+font-family:'Great Vibes', cursive;
+font-size:40px;
+font-weight:bold;
+}
+
+/* FRAME */
+.frame{
+border:2px solid rgba(212,175,55,0.6);
+padding:20px;
+border-radius:15px;
+background:rgba(0,0,0,0.3);
+}
+
+/* FRAME COKLAT */
+.frame-coklat{
+background:rgba(101,67,33,0.8);
+padding:25px;
+border-radius:15px;
+max-width:80%;
+}
+
+/* FOTO */
+img{
+max-width:250px;
+width:100%;
+height:auto;
+border-radius:10px;
+object-fit:contain;
+margin:10px;
+}
+
+/* BUTTON */
+.btn{
+margin-top:20px;
+padding:12px 25px;
+background:gold;
+border:none;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* OPENING */
 .opening{
 position:fixed;
 width:100%;
@@ -74,21 +125,7 @@ align-items:center;
 z-index:999;
 }
 
-.btn{
-margin-top:20px;
-padding:12px 25px;
-background:gold;
-border:none;
-border-radius:30px;
-font-weight:bold;
-}
-
-img{
-max-width:300px;
-border-radius:15px;
-margin:10px;
-}
-
+/* LINK */
 a{
 display:inline-block;
 margin:5px;
@@ -97,6 +134,45 @@ background:gold;
 color:#000;
 border-radius:20px;
 text-decoration:none;
+}
+
+/* GALERI */
+.gallery{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+/* FORM */
+input, textarea{
+width:80%;
+padding:10px;
+margin:5px;
+border-radius:10px;
+border:none;
+}
+
+/* 🌸 ANIMASI BUNGA */
+.bunga{
+position:fixed;
+top:-50px;
+width:25px;
+height:25px;
+background:url('bunga-jawa.png') no-repeat center/contain;
+pointer-events:none;
+z-index:2;
+animation:jatuh linear infinite;
+}
+
+@keyframes jatuh{
+0%{
+transform:translateY(-50px) translateX(0) rotate(0deg);
+opacity:1;
+}
+100%{
+transform:translateY(110vh) translateX(100px) rotate(360deg);
+opacity:0;
+}
 }
 </style>
 </head>
@@ -107,122 +183,170 @@ text-decoration:none;
 <source src="Lestari.mp3">
 </audio>
 
+<!-- OPENING -->
 <div class="opening" id="opening">
 <h2>Undangan Untuk</h2>
 <h1 id="guest">Tamu</h1>
 <button class="btn" onclick="openInvite()">Buka Undangan</button>
 </div>
 
-<!-- HERO -->
+<!-- HALAMAN 1 -->
 <section>
 <div class="overlay"></div>
-<h1 class="fade">The Wedding Of</h1>
-<h2 class="fade">Trimono & Puji</h2>
-<p class="fade">Kamis, 28 Mei 2026</p>
+<div class="frame fade">
+<h1>The Wedding Of</h1>
+<h2 class="nama">Trimono & Puji</h2>
+<p>Kamis, 28 Mei 2026</p>
+</div>
 </section>
 
-<!-- FOTO + AYAT -->
+<!-- HALAMAN 2 -->
+<section>
+<div class="overlay"></div>
+<div class="frame fade">
+<h1 style="font-weight:bold;">The Wedding Of</h1>
+<h2 class="nama">Trimono & Puji</h2>
+</div>
+</section>
+
+<!-- HALAMAN 3 -->
 <section>
 <div class="overlay"></div>
 <img src="galeri3.jpg" class="fade">
-<p class="fade">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."</p>
 <p class="fade">(QS Ar-Rum:21)</p>
 </section>
 
-<!-- PROFIL -->
+<!-- HALAMAN 4 -->
 <section>
 <div class="overlay"></div>
-<img src="galeri2.jpg" class="fade">
-<p class="fade">Trimono</p>
-<p class="fade">Putra Bapak ... & Ibu ...</p>
-
-<img src="galeri3.jpg" class="fade">
-<p class="fade">Puji Rahayu</p>
-<p class="fade">Putri Bapak ... & Ibu ...</p>
+<div class="frame-coklat fade">
+<h2>Our Journey</h2>
+<p>Cerita perjalanan cinta...</p>
+</div>
 </section>
 
-<!-- OUR JOURNEY (SUDAH DIUPDATE) -->
+<!-- HALAMAN 5 -->
+<section>
+<div class="overlay"></div>
+<div class="frame-coklat fade">
+<h2>Akad & Resepsi</h2>
+<p>Kamis, 28 Mei 2026</p>
+</div>
+</section>
+
+<!-- HALAMAN 6 -->
+<section>
+<div class="overlay"></div>
+<div class="frame fade">
+<h2>Detail Acara</h2>
+<p>Jam 07:00 - Selesai</p>
+<a href="#">Google Maps</a>
+</div>
+</section>
+
+<!-- HALAMAN 7 -->
+<section>
+<div class="overlay"></div>
+<div class="frame fade">
+<h2>Konfirmasi Kehadiran</h2>
+<a href="#">WhatsApp</a>
+</div>
+</section>
+
+<!-- HALAMAN 8 -->
+<section>
+<div class="overlay"></div>
+<div class="frame fade">
+<h2>Gallery</h2>
+
+<div class="gallery">
+<img src="galeri1.jpg">
+<img src="galeri2.jpg">
+<img src="galeri3.jpg">
+<img src="galeri4.jpg">
+</div>
+
+</div>
+</section>
+
+<!-- HALAMAN 9 -->
+<section>
+<div class="overlay"></div>
+<div class="frame fade">
+
+<h2>Wedding Wish</h2>
+
+<input id="nama" placeholder="Nama">
+<textarea id="ucapan" placeholder="Ucapan"></textarea>
+<button class="btn" onclick="kirim()">Kirim</button>
+
+<div id="list"></div>
+
+</div>
+</section>
+
+<!-- HALAMAN 10 -->
 <section>
 <div class="overlay"></div>
 
-<h2 class="fade">Our Journey</h2>
+<img src="galeri2.jpg" style="position:absolute;width:100%;height:100%;object-fit:cover;opacity:0.2;z-index:-1;">
 
-<img src="galeri4.jpg" class="fade">
-
-<div class="fade" style="max-width:500px; line-height:1.7; margin-top:15px;">
-<p>
-Awal pertemuan kami terjadi tanpa direncanakan, di sebuah momen sederhana yang kemudian menjadi awal cerita panjang. 
-Seiring berjalannya waktu, kebersamaan yang terjalin menghadirkan rasa saling memahami, melengkapi, dan menumbuhkan kasih yang tulus.
-</p>
-
-<p>
-Dari perjalanan tersebut, kami belajar bahwa setiap langkah memiliki makna, hingga akhirnya kami memutuskan untuk melangkah bersama dalam ikatan suci pernikahan.
-</p>
+<div class="frame fade">
+<h2>Terima Kasih</h2>
+<p>Atas Kehadirannya</p>
 </div>
 
 </section>
 
-<!-- ACARA -->
-<section>
-<div class="overlay"></div>
-<h2 class="fade">Akad & Resepsi</h2>
-<p class="fade">Kamis, 28 Mei 2026</p>
-<p class="fade">Jam 07:00 - Selesai</p>
-
-<a href="https://maps.app.goo.gl/bXpRy7Uh2XTAEn1F7">Google Maps</a>
-<a href="#">Save Kalender</a>
-</section>
-
-<!-- RSVP -->
-<section>
-<div class="overlay"></div>
-<h2 class="fade">Konfirmasi Kehadiran</h2>
-<a href="https://wa.me/">Kirim WhatsApp</a>
-</section>
-
-<!-- GALERI -->
-<section>
-<div class="overlay"></div>
-<h2 class="fade">Gallery</h2>
-<img src="galeri1.jpg" class="fade">
-<img src="galeri2.jpg" class="fade">
-<img src="galeri3.jpg" class="fade">
-<img src="galeri4.jpg" class="fade">
-</section>
-
-<!-- WISH -->
-<section>
-<div class="overlay"></div>
-<h2 class="fade">Wedding Wish</h2>
-<p class="fade">Doa & Ucapan...</p>
-</section>
-
-<!-- PENUTUP -->
-<section>
-<div class="overlay"></div>
-<h2 class="fade">Terima Kasih</h2>
-<p class="fade">Atas Kehadirannya</p>
-</section>
-
 <script>
 const urlParams = new URLSearchParams(window.location.search);
-document.getElementById('guest').innerText = urlParams.get('to') || 'Kusuma';
+document.getElementById('guest').innerText = urlParams.get('to') || 'Tamu';
 
 function openInvite(){
 document.getElementById('opening').style.display='none';
 document.getElementById('music').play();
 }
 
+/* ANIMASI SCROLL */
 const fades = document.querySelectorAll('.fade');
-
 window.addEventListener('scroll',()=>{
 fades.forEach(el=>{
-const top = el.getBoundingClientRect().top;
-if(top < window.innerHeight - 100){
+if(el.getBoundingClientRect().top < window.innerHeight - 100){
 el.classList.add('show');
 }
 });
 });
+
+/* WISH */
+function kirim(){
+let nama = document.getElementById('nama').value;
+let ucapan = document.getElementById('ucapan').value;
+
+let div = document.createElement('p');
+div.innerHTML = "<b>"+nama+"</b>: "+ucapan;
+
+document.getElementById('list').appendChild(div);
+}
+
+/* 🌸 BUNGA JATUH */
+function buatBunga(){
+for(let i=0;i<12;i++){
+let bunga = document.createElement("div");
+bunga.classList.add("bunga");
+
+bunga.style.left = Math.random()*100+"vw";
+bunga.style.animationDuration = (5 + Math.random()*5)+"s";
+bunga.style.opacity = Math.random();
+
+document.body.appendChild(bunga);
+
+setTimeout(()=>{
+bunga.remove();
+},10000);
+}
+}
+
+setInterval(buatBunga,2000);
 </script>
 
 </body>
