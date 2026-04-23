@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Trimono & Puji</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
@@ -21,26 +20,25 @@ color:#fff;
 overflow-x:hidden;
 }
 
-/* 🔵 BACKGROUND */
 body::before{
 content:'';
 position:fixed;
 width:100%;
 height:100%;
-background:url('bg.jpg') center/cover; /* 🔵 BACKGROUND */
-z-index:-3;
+background:url('bg.jpg') center/cover;
+z-index:-2;
 }
 
-/* OVERLAY */
 .overlay{
 position:absolute;
 width:100%;
 height:100%;
 background:rgba(0,0,0,0.5);
-z-index:-2;
+top:0;
+left:0;
+z-index:-1;
 }
 
-/* SECTION */
 section{
 height:100vh;
 scroll-snap-align:start;
@@ -51,89 +49,19 @@ align-items:center;
 text-align:center;
 padding:20px;
 position:relative;
-overflow:hidden;
 }
 
-/* 🔥 ANIMASI PREMIUM */
 .fade{
 opacity:0;
-transform:translateY(80px) scale(0.9);
-filter:blur(10px);
-transition:all 1.4s cubic-bezier(.16,1,.3,1);
+transform:translateY(40px);
+transition:1s;
 }
 
 .fade.show{
 opacity:1;
-transform:translateY(0) scale(1);
-filter:blur(0);
+transform:translateY(0);
 }
 
-/* STAGGER */
-.fade:nth-child(1){transition-delay:0.2s;}
-.fade:nth-child(2){transition-delay:0.4s;}
-.fade:nth-child(3){transition-delay:0.6s;}
-.fade:nth-child(4){transition-delay:0.8s;}
-
-/* TEXT */
-.gold{
-color:#ffd700;
-text-shadow:0 0 15px rgba(255,215,0,0.8);
-}
-
-.title{
-animation:zoomText 2s ease;
-}
-
-@keyframes zoomText{
-0%{transform:scale(0.8); opacity:0;}
-100%{transform:scale(1); opacity:1;}
-}
-
-/* 🟢 FRAME ORNAMEN */
-.frame-top,.frame-bottom{
-position:absolute;
-width:100%;
-height:80px;
-background:linear-gradient(90deg,#caa84a,#ffd700,#caa84a);
-opacity:0.2;
-}
-
-.frame-top{top:0;}
-.frame-bottom{bottom:0;}
-
-/* 🟢 WAYANG */
-.wayang{
-position:absolute;
-bottom:0;
-width:120px;
-opacity:0.25;
-filter:drop-shadow(0 0 10px gold);
-animation:float 6s ease-in-out infinite;
-}
-
-.left{left:0;}
-.right{right:0; transform:scaleX(-1);}
-
-@keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-30px);}
-}
-
-/* 🟢 FOG */
-.fog{
-position:absolute;
-width:100%;
-height:100%;
-background:radial-gradient(circle,rgba(255,215,0,0.15),transparent);
-animation:fog 10s linear infinite;
-}
-
-@keyframes fog{
-0%{transform:translateY(0);}
-100%{transform:translateY(-60px);}
-}
-
-/* OPENING */
 .opening{
 position:fixed;
 width:100%;
@@ -144,18 +72,6 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 z-index:999;
-transition:1s;
-}
-
-/* 🟢 GUNUNGAN */
-.gunungan{
-width:180px;
-animation:zoomIn 2s ease;
-}
-
-@keyframes zoomIn{
-from{transform:scale(0.5);opacity:0;}
-to{transform:scale(1);opacity:1;}
 }
 
 .btn{
@@ -165,18 +81,16 @@ background:gold;
 border:none;
 border-radius:30px;
 font-weight:bold;
-cursor:pointer;
 }
 
-/* 🔴 FOTO */
 img{
 max-width:300px;
 border-radius:15px;
 margin:10px;
 }
 
-/* BUTTON */
 a{
+display:inline-block;
 margin:5px;
 padding:10px 20px;
 background:gold;
@@ -189,62 +103,105 @@ text-decoration:none;
 
 <body>
 
-<!-- AUDIO -->
 <audio id="music" loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+<source src="Lestari.mp3">
 </audio>
 
-<!-- OPENING -->
 <div class="opening" id="opening">
-<img class="gunungan" src="gunungan.png"> <!-- 🟢 ORNAMEN -->
-<h2 class="gold">Undangan Untuk</h2>
-<h1 id="guest" class="gold">Tamu</h1>
+<h2>Undangan Untuk</h2>
+<h1 id="guest">Tamu</h1>
 <button class="btn" onclick="openInvite()">Buka Undangan</button>
 </div>
 
 <!-- HERO -->
 <section>
 <div class="overlay"></div>
-
-<div class="frame-top"></div> <!-- 🟢 -->
-<div class="frame-bottom"></div> <!-- 🟢 -->
-<div class="fog"></div> <!-- 🟢 -->
-
-<img class="wayang left" src="wayang-kiri.png"> <!-- 🟢 -->
-<img class="wayang right" src="wayang-kanan.png"> <!-- 🟢 -->
-
-<h1 class="fade gold title">The Wedding Of</h1>
-<h2 class="fade gold">Trimono & Puji Rahayu</h2>
+<h1 class="fade">The Wedding Of</h1>
+<h2 class="fade">Trimono & Puji</h2>
 <p class="fade">Kamis, 28 Mei 2026</p>
 </section>
 
-<!-- FOTO -->
+<!-- FOTO + AYAT -->
 <section>
 <div class="overlay"></div>
-
-<div class="frame-top"></div>
-<div class="frame-bottom"></div>
-<div class="fog"></div>
-
-<img class="fade" src="galeri3.jpg"> <!-- 🔴 FOTO -->
+<img src="galeri3.jpg" class="fade">
+<p class="fade">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."</p>
 <p class="fade">(QS Ar-Rum:21)</p>
 </section>
 
-<!-- JOURNEY -->
+<!-- PROFIL -->
+<section>
+<div class="overlay"></div>
+<img src="galeri2.jpg" class="fade">
+<p class="fade">Trimono</p>
+<p class="fade">Putra Bapak ... & Ibu ...</p>
+
+<img src="galeri3.jpg" class="fade">
+<p class="fade">Puji Rahayu</p>
+<p class="fade">Putri Bapak ... & Ibu ...</p>
+</section>
+
+<!-- OUR JOURNEY (SUDAH DIUPDATE) -->
 <section>
 <div class="overlay"></div>
 
-<div class="frame-top"></div>
-<div class="frame-bottom"></div>
-<div class="fog"></div>
+<h2 class="fade">Our Journey</h2>
 
-<h2 class="fade gold">Our Journey</h2>
-<img class="fade" src="journey.jpg"> <!-- 🔴 FOTO -->
+<img src="galeri4.jpg" class="fade">
 
-<p class="fade" style="max-width:500px;">
-Awal pertemuan kami terjadi tanpa direncanakan...
-hingga akhirnya kami memutuskan menikah.
+<div class="fade" style="max-width:500px; line-height:1.7; margin-top:15px;">
+<p>
+Awal pertemuan kami terjadi tanpa direncanakan, di sebuah momen sederhana yang kemudian menjadi awal cerita panjang. 
+Seiring berjalannya waktu, kebersamaan yang terjalin menghadirkan rasa saling memahami, melengkapi, dan menumbuhkan kasih yang tulus.
 </p>
+
+<p>
+Dari perjalanan tersebut, kami belajar bahwa setiap langkah memiliki makna, hingga akhirnya kami memutuskan untuk melangkah bersama dalam ikatan suci pernikahan.
+</p>
+</div>
+
+</section>
+
+<!-- ACARA -->
+<section>
+<div class="overlay"></div>
+<h2 class="fade">Akad & Resepsi</h2>
+<p class="fade">Kamis, 28 Mei 2026</p>
+<p class="fade">Jam 07:00 - Selesai</p>
+
+<a href="https://maps.app.goo.gl/bXpRy7Uh2XTAEn1F7">Google Maps</a>
+<a href="#">Save Kalender</a>
+</section>
+
+<!-- RSVP -->
+<section>
+<div class="overlay"></div>
+<h2 class="fade">Konfirmasi Kehadiran</h2>
+<a href="https://wa.me/">Kirim WhatsApp</a>
+</section>
+
+<!-- GALERI -->
+<section>
+<div class="overlay"></div>
+<h2 class="fade">Gallery</h2>
+<img src="galeri1.jpg" class="fade">
+<img src="galeri2.jpg" class="fade">
+<img src="galeri3.jpg" class="fade">
+<img src="galeri4.jpg" class="fade">
+</section>
+
+<!-- WISH -->
+<section>
+<div class="overlay"></div>
+<h2 class="fade">Wedding Wish</h2>
+<p class="fade">Doa & Ucapan...</p>
+</section>
+
+<!-- PENUTUP -->
+<section>
+<div class="overlay"></div>
+<h2 class="fade">Terima Kasih</h2>
+<p class="fade">Atas Kehadirannya</p>
 </section>
 
 <script>
@@ -252,21 +209,19 @@ const urlParams = new URLSearchParams(window.location.search);
 document.getElementById('guest').innerText = urlParams.get('to') || 'Kusuma';
 
 function openInvite(){
-document.getElementById('opening').style.opacity=0;
-setTimeout(()=>{opening.style.display='none'},1000);
+document.getElementById('opening').style.display='none';
 document.getElementById('music').play();
 }
 
-const observer = new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add('show');
+const fades = document.querySelectorAll('.fade');
+
+window.addEventListener('scroll',()=>{
+fades.forEach(el=>{
+const top = el.getBoundingClientRect().top;
+if(top < window.innerHeight - 100){
+el.classList.add('show');
 }
 });
-},{threshold:0.2});
-
-document.querySelectorAll('.fade').forEach(el=>{
-observer.observe(el);
 });
 </script>
 
