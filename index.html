@@ -20,13 +20,21 @@
 
         body {
             font-family: 'Lora', serif;
+            /* PERBAIKAN BACKGROUND: Tidak menggunakan fixed di body untuk menghindari zoom ekstrem */
             background: linear-gradient(rgba(0, 31, 63, 0.8), rgba(0, 31, 63, 0.8)), url('background.jpg');
             background-repeat: no-repeat;
-            background-position: center;
+            background-position: center center;
             background-size: cover;
-            background-attachment: fixed;
+            background-attachment: scroll; /* Mengubah fixed ke scroll agar proporsional di HP */
             color: white;
             overflow-x: hidden;
+        }
+
+        /* Khusus Layar Desktop, kita kembalikan efek fixed agar elegan */
+        @media (min-width: 1024px) {
+            body {
+                background-attachment: fixed;
+            }
         }
 
         .font-aesthetic {
@@ -34,14 +42,13 @@
             color: var(--gold);
         }
 
-        /* PERBAIKAN EFEK SMOKE (PURE CSS) */
+        /* Efek Smoke (Pure CSS) */
         .fog-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1; pointer-events: none;
             overflow: hidden;
         }
-
         .fog-img {
             position: absolute;
             width: 300%; height: 300%;
@@ -50,7 +57,6 @@
             filter: blur(60px);
             opacity: 0.6;
         }
-
         .fog-1 { animation: smokeMovement 25s linear infinite; }
         .fog-2 { animation: smokeMovement 40s linear infinite reverse; opacity: 0.3; }
 
@@ -100,7 +106,7 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.4);
         }
 
-        /* Ornamen Sudut HP-Friendly */
+        /* Ornamen Sudut */
         .glass-card::before, .glass-card::after {
             content: "";
             position: absolute;
@@ -126,7 +132,6 @@
             display: inline-block;
             transition: 0.3s ease;
         }
-        .btn-gold:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(212,175,55,0.5); }
 
         .circle-img {
             width: 160px; height: 160px;
@@ -149,12 +154,13 @@
             border: 1px solid var(--gold);
         }
 
-        /* Responsive Mobile */
         @media (max-width: 600px) {
             #opening h1 { font-size: 3rem !important; }
             .font-aesthetic { font-size: 2.5rem !important; }
             .glass-card { padding: 30px 20px; }
             .circle-img { width: 140px; height: 140px; }
+            /* Tambahan agar kartu tidak terlalu lebar di HP sangat kecil */
+            .content-page { padding: 40px 15px; }
         }
     </style>
 </head>
@@ -252,17 +258,14 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Inisialisasi AOS
         AOS.init({ duration: 1200, once: true });
 
-        // Fitur Nama Tamu dari URL
         const params = new URLSearchParams(window.location.search);
         const to = params.get('to');
         if (to) {
             document.getElementById('guest-name').innerText = decodeURIComponent(to);
         }
 
-        // Buka Undangan
         function startInvitation() {
             const open = document.getElementById('opening');
             open.style.transform = 'translateY(-100%)';
