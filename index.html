@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Trimono & Puji</title>
+    <title>Pernikahan Trimono & Puji</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lora&family=Pinyon+Script&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -19,7 +19,7 @@
 
         body {
             font-family: 'Lora', serif;
-            background: linear-gradient(rgba(0, 31, 63, 0.8), rgba(0, 31, 63, 0.8)), url('background.jpg');
+            background: linear-gradient(rgba(0, 31, 63, 0.85), rgba(0, 31, 63, 0.85)), url('background.jpg');
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
@@ -28,9 +28,12 @@
             overflow-x: hidden;
         }
 
+        /* Responsive Background untuk PC */
+        @media (min-width: 1024px) { body { background-attachment: fixed; } }
+
         .font-aesthetic { font-family: 'Pinyon Script', cursive; color: var(--gold); }
 
-        /* FOG DARI FILE ANDA */
+        /* FOG DARI FILE asap.png */
         .fog-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -41,8 +44,8 @@
             width: 200%; height: 100%;
             background: url('fog.png') repeat-x;
             background-size: contain;
-            opacity: 0.5;
-            animation: moveFog 30s linear infinite;
+            opacity: 0.4;
+            animation: moveFog 40s linear infinite;
         }
         @keyframes moveFog {
             from { transform: translateX(0); }
@@ -52,38 +55,37 @@
         #opening {
             height: 100vh; display: flex; justify-content: center; align-items: center;
             text-align: center; background: var(--navy); position: fixed;
-            width: 100%; z-index: 1000; transition: 1s ease-in-out;
+            width: 100%; z-index: 1000; transition: 1.2s ease-in-out;
         }
 
-        .content-page { min-height: 100vh; padding: 60px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 10; }
+        .content-page { min-height: 100vh; padding: 60px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 10; text-align: center; }
 
         .glass-card {
-            background: var(--white-trans); backdrop-filter: blur(10px);
-            border: 1px solid var(--gold); padding: 35px 20px; border-radius: 20px;
-            max-width: 500px; width: 100%; position: relative; margin-bottom: 20px;
+            background: var(--white-trans); backdrop-filter: blur(12px);
+            border: 1.5px solid var(--gold); padding: 35px 20px; border-radius: 20px;
+            max-width: 550px; width: 100%; position: relative; margin-bottom: 30px;
         }
 
-        /* ORNAMEN PASTI MUNCUL JIKA FILE ADA */
-        .ornamen-bunga-corner {
-            position: absolute; width: 60px; height: 60px; z-index: 15;
+        /* ORNAMEN BUNGA DI POJOK */
+        .glass-card::before, .glass-card::after {
+            content: ""; position: absolute; width: 60px; height: 60px;
             background: url('bunga-jawa.png') no-repeat; background-size: contain;
         }
-        .top-left { top: -10px; left: -10px; }
-        .bottom-right { bottom: -10px; right: -10px; transform: rotate(180deg); }
+        .glass-card::before { top: -10px; left: -10px; }
+        .glass-card::after { bottom: -10px; right: -10px; transform: rotate(180deg); }
 
-        .btn-gold { background: var(--gold); color: var(--navy); border: none; padding: 12px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        .btn-gold { background: var(--gold); color: var(--navy); border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 15px; }
 
-        .circle-img { width: 140px; height: 140px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; margin-bottom: 15px; }
+        .circle-img { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; margin-bottom: 15px; }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; margin-top: 15px; }
+        .gallery-grid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; border: 1px solid var(--gold); }
 
         /* WEDDING WISH STYLE */
-        #wish-form input, #wish-form textarea {
-            width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none;
-        }
-        #wish-container {
-            max-height: 300px; overflow-y: auto; text-align: left; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px;
-        }
-        .wish-item { border-bottom: 1px solid var(--gold); padding: 10px 0; }
-        .wish-name { font-weight: bold; color: var(--gold); }
+        #wish-form input, #wish-form textarea { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--gold); background: rgba(255,255,255,0.1); color: white; font-family: inherit; }
+        #wish-container { max-height: 300px; overflow-y: auto; text-align: left; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.3); }
+        .wish-item { border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding: 12px 0; }
+        .wish-name { font-weight: bold; color: var(--gold); display: block; margin-bottom: 4px; }
     </style>
 </head>
 <body style="overflow: hidden;">
@@ -93,11 +95,12 @@
     <div class="fog-container"><div class="fog-img"></div></div>
 
     <section id="opening">
-        <div data-aos="zoom-in">
+        <div data-aos="zoom-in" data-aos-duration="1500">
+            <h2 style="letter-spacing: 5px; font-size: 0.9rem; margin-bottom: 10px;">THE WEDDING OF</h2>
             <h1 class="font-aesthetic" style="font-size: 4rem;">Trimono & Puji</h1>
-            <div style="margin: 20px 0;">
-                <p>Kepada Yth:</p>
-                <h3 id="guest-name" class="font-aesthetic" style="font-size: 2rem;">Tamu Undangan</h3>
+            <div style="margin: 30px 0;">
+                <p style="font-size: 0.8rem; letter-spacing: 2px;">KEPADA YTH:</p>
+                <h3 id="guest-name" class="font-aesthetic" style="font-size: 2.5rem;">Tamu Undangan</h3>
             </div>
             <button onclick="startInvitation()" class="btn-gold">Buka Undangan</button>
         </div>
@@ -105,19 +108,60 @@
 
     <section class="content-page">
         <div class="glass-card" data-aos="fade-up">
-            <div class="bunga-jawa-corner top-left"></div>
-            <img src="WAYANG-KIRI.png" style="width: 80px; margin-bottom: 10px;">
-            <h2 class="font-aesthetic" style="font-size: 3rem;">Trimono & Puji</h2>
-            <p>28 MEI 2028</p>
-            <div class="ornamen-bunga-corner bottom-right"></div>
+            <img src="WAYANG-KANAN.png" style="width: 100px; margin-bottom: 10px;">
+            <h2 class="font-aesthetic" style="font-size: 3.5rem;">Trimono & Puji</h2>
+            <p style="letter-spacing: 3px;">KAMIS, 28 MEI 2028</p>
+        </div>
+    </section>
+
+    <section class="content-page">
+        <div class="glass-card" data-aos="zoom-in">
+            <img src="galeri1.jpg" style="width: 100%; border-radius: 15px; margin-bottom: 20px;">
+            <p style="font-style: italic; line-height: 1.6;">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri..."</p>
+            <p style="margin-top: 15px;"><strong>(QS. Ar-Rum: 21)</strong></p>
+        </div>
+    </section>
+
+    <section class="content-page">
+        <div class="glass-card" data-aos="fade-right">
+            <img src="galeri2.jpg" class="circle-img">
+            <h3 style="color: var(--gold); font-size: 1.8rem;">Trimono, S.H</h3>
+            <p>Putra dari Bapak Saeno & Ibu Suwarni</p>
+        </div>
+        <div class="font-aesthetic" style="font-size: 3rem; margin: 10px 0;">&</div>
+        <div class="glass-card" data-aos="fade-left">
+            <img src="galeri3.jpg" class="circle-img">
+            <h3 style="color: var(--gold); font-size: 1.8rem;">Puji Rahayu</h3>
+            <p>Putri dari Ibu Sukinem (PB)</p>
         </div>
     </section>
 
     <section class="content-page">
         <div class="glass-card" data-aos="fade-up">
-            <h2 class="font-aesthetic" style="font-size: 2.5rem;">Our Journey</h2>
-            <img src="galeri1.jpg" style="width: 100%; border-radius: 10px; margin: 15px 0;">
-            <p style="font-size: 0.9rem; line-height: 1.6;">Berawal dari sebuah pertemuan sederhana di tanah Ngawi, takdir membawa Trimono dan Puji dalam satu frekuensi yang sama. Perkenalan yang tenang namun pasti membawa kami pada komitmen suci ini.</p>
+            <h2 class="font-aesthetic" style="font-size: 3rem;">Our Journey</h2>
+            <img src="galeri4.jpg" style="width: 100%; border-radius: 10px; margin: 20px 0;">
+            <p style="line-height: 1.8;">Berawal dari sebuah pertemuan sederhana di tanah Ngawi, takdir membawa Trimono dan Puji dalam satu frekuensi yang sama. Perkenalan yang tenang namun pasti membawa kami pada komitmen suci ini.</p>
+        </div>
+    </section>
+
+    <section class="content-page">
+        <div class="glass-card" data-aos="flip-left">
+            <h3 style="color: var(--gold); font-size: 2.2rem; margin-bottom: 10px;">Lokasi Acara</h3>
+            <p>Ds. Tempuran, Dsn. Munggur, RT 02/RW 04</p>
+            <p>Kec. Paron, Kab. Ngawi</p>
+            <a href="https://maps.google.com" target="_blank" class="btn-gold">Buka Google Maps</a>
+        </div>
+    </section>
+
+    <section class="content-page">
+        <h2 class="font-aesthetic" style="font-size: 3rem; margin-bottom: 20px;">Gallery</h2>
+        <div class="glass-card" data-aos="fade-up">
+            <div class="gallery-grid">
+                <img src="galeri1.jpg">
+                <img src="galeri2.jpg">
+                <img src="galeri3.jpg">
+                <img src="galeri4.jpg">
+            </div>
         </div>
     </section>
 
@@ -126,22 +170,30 @@
             <h2 class="font-aesthetic" style="font-size: 2.5rem; margin-bottom: 20px;">Wedding Wishes</h2>
             <form id="wish-form">
                 <input type="text" id="inputName" placeholder="Nama Anda" required>
-                <textarea id="inputWish" placeholder="Berikan ucapan & doa restu..." rows="3" required></textarea>
+                <textarea id="inputWish" placeholder="Tulis ucapan doa restu..." rows="3" required></textarea>
                 <button type="button" onclick="sendWish()" class="btn-gold" style="width: 100%;">Kirim Ucapan</button>
             </form>
-            <hr style="margin: 20px 0; border: 0.5px solid var(--gold);">
+            <hr style="margin: 25px 0; border: 0.5px solid rgba(212, 175, 55, 0.5);">
             <div id="wish-container">
                 </div>
         </div>
     </section>
 
+    <section class="content-page">
+        <div class="glass-card" data-aos="zoom-in">
+            <h2 class="font-aesthetic" style="font-size: 3rem;">Matur Nuwun</h2>
+            <p>Atas kehadiran dan doa restu Bapak/Ibu sekalian.</p>
+        </div>
+    </section>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({ duration: 1200, once: true });
 
-        // Ambil nama dari URL
+        // Fitur Nama Tamu URL
         const params = new URLSearchParams(window.location.search);
-        if(params.get('to')) document.getElementById('guest-name').innerText = params.get('to');
+        const to = params.get('to');
+        if(to) document.getElementById('guest-name').innerText = decodeURIComponent(to);
 
         function startInvitation() {
             document.getElementById('opening').style.transform = 'translateY(-100%)';
@@ -149,35 +201,36 @@
             document.body.style.overflow = "auto";
         }
 
-        // FUNGSI WEDDING WISH (REAL-TIME SIMULATION)
+        // SISTEM BUKU TAMU (LOCAL STORAGE)
         function sendWish() {
             const name = document.getElementById('inputName').value;
             const wish = document.getElementById('inputWish').value;
             
             if(name && wish) {
                 const container = document.getElementById('wish-container');
-                const html = `<div class="wish-item"><p class="wish-name">${name}</p><p>${wish}</p></div>`;
+                const time = new Date().toLocaleDateString();
+                const html = `<div class="wish-item"><span class="wish-name">${name}</span><p style="font-size: 0.9rem; opacity: 0.9;">${wish}</p><small style="font-size: 0.7rem; opacity: 0.5;">${time}</small></div>`;
                 container.innerHTML = html + container.innerHTML;
                 
                 // Reset Form
                 document.getElementById('inputName').value = "";
                 document.getElementById('inputWish').value = "";
                 
-                // Simpan ke database (Simulasi LocalStorage)
+                // Simpan Data
                 let wishes = JSON.parse(localStorage.getItem('weddingWishes')) || [];
-                wishes.push({name, wish});
+                wishes.push({name, wish, time});
                 localStorage.setItem('weddingWishes', JSON.stringify(wishes));
             }
         }
 
-        // Load Wishes on Start
-        window.onload = function() {
+        // Load ucapan saat halaman dibuka
+        window.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('wish-container');
             let wishes = JSON.parse(localStorage.getItem('weddingWishes')) || [];
             wishes.reverse().forEach(data => {
-                container.innerHTML += `<div class="wish-item"><p class="wish-name">${data.name}</p><p>${data.wish}</p></div>`;
+                container.innerHTML += `<div class="wish-item"><span class="wish-name">${data.name}</span><p style="font-size: 0.9rem; opacity: 0.9;">${data.wish}</p><small style="font-size: 0.7rem; opacity: 0.5;">${data.time || ''}</small></div>`;
             });
-        }
+        });
     </script>
 </body>
 </html>
