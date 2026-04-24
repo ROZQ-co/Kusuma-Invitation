@@ -17,16 +17,17 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Lora', serif;
-            background: linear-gradient(rgba(0, 31, 63, 0.85), rgba(0, 31, 63, 0.85)), url('background.jpg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            background-attachment: scroll;
-            color: white;
-            overflow-x: hidden;
-        }
+       body {
+    font-family: 'Lora', serif;
+    background: linear-gradient(rgba(0, 31, 63, 0.85), rgba(0, 31, 63, 0.85)), url('background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    /* GANTI 'cover' dengan 100% agar lebar gambar pas dengan layar */
+    background-size: 100% auto; 
+    background-attachment: scroll;
+    color: white;
+    overflow-x: hidden;
+}
 
         /* Responsive Background untuk PC */
         @media (min-width: 1024px) { body { background-attachment: fixed; } }
