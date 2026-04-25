@@ -1,241 +1,147 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pernikahan Trimono & Puji</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lora&family=Pinyon+Script&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Pernikahan</title>
 
-    <style>
-        :root {
-            --navy: #001f3f;
-            --gold: #d4af37;
-            --white-trans: rgba(255, 255, 255, 0.12);
-        }
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-        body {
-            font-family: 'Lora', serif;
-            background: linear-gradient(rgba(0, 31, 63, 0.85), rgba(0, 31, 63, 0.85)), url('background.jpg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            background-attachment: scroll;
-            color: white;
-            overflow-x: hidden;
-        }
+    body, html {
+      height: 100%;
+      overflow: hidden;
+    }
 
-        @media (min-width: 1024px) { body { background-attachment: fixed; } }
+    /* Video Background */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      transition: 1s;
+    }
 
-        .font-aesthetic { font-family: 'Pinyon Script', cursive; color: var(--gold); }
+    /* Overlay gelap */
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+    }
 
-        /* ASAP DARI FILE ANDA */
-        .fog-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 2; pointer-events: none;
-        }
-        .fog-img {
-            position: absolute;
-            width: 200%; height: 100%;
-            background: url('fog.png') repeat-x;
-            background-size: contain;
-            opacity: 0.3;
-            animation: moveFog 40s linear infinite;
-        }
-        @keyframes moveFog {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
+    /* Konten */
+    .content {
+      position: relative;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
 
-        #opening {
-            height: 100vh; display: flex; justify-content: center; align-items: center;
-            text-align: center; background: var(--navy); position: fixed;
-            width: 100%; z-index: 1000; transition: 1.2s ease-in-out;
-        }
+    h2 {
+      font-size: 22px;
+      letter-spacing: 2px;
+      animation: fadeIn 2s ease;
+    }
 
-        .content-page { 
-            min-height: 100vh; 
-            padding: 120px 20px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            position: relative; 
-            z-index: 10; 
-            text-align: center; 
-        }
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 45px;
+      margin: 10px 0;
+      animation: fadeIn 3s ease;
+    }
 
-        /* ORNAMEN ATAS & BAWAH BERBEDA */
-        .ornamen-page-top {
-            position: absolute; top: 20px; width: 90%; max-width: 650px; height: 120px;
-            background-image: url('ornamen-atas.png'); background-size: contain;
-            background-repeat: no-repeat; background-position: center; z-index: 5; opacity: 0.9;
-        }
+    p {
+      font-size: 16px;
+      margin-bottom: 25px;
+      animation: fadeIn 4s ease;
+    }
 
-        .ornamen-page-bottom {
-            position: absolute; bottom: 20px; width: 80%; max-width: 500px; height: 150px;
-            background-image: url('ornamen-bawah.png'); background-size: contain;
-            background-repeat: no-repeat; background-position: center; z-index: 5; opacity: 0.8;
-        }
+    /* Tombol */
+    .btn {
+      padding: 12px 30px;
+      background: #c59d5f;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        .glass-card {
-            background: var(--white-trans); backdrop-filter: blur(12px);
-            border: 1.5px solid var(--gold); padding: 40px 25px; border-radius: 25px;
-            max-width: 550px; width: 100%; position: relative; margin: 30px 0;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.4);
-        }
+    .btn:hover {
+      background: #a67c3c;
+    }
 
-        .btn-gold { 
-            background: var(--gold); color: var(--navy); border: none; 
-            padding: 12px 30px; border-radius: 50px; font-weight: bold; 
-            cursor: pointer; text-decoration: none; display: inline-block; 
-            margin-top: 15px; font-size: 0.9rem; letter-spacing: 1px;
-        }
+    /* Animasi */
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
 
-        .bank-card { background: rgba(255,255,255,0.05); border: 1px dashed var(--gold); padding: 20px; border-radius: 15px; margin-bottom: 15px; }
-
-        .circle-img { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; margin-bottom: 15px; }
-
-        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; margin-top: 15px; }
-        .gallery-grid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; border: 1px solid var(--gold); }
-
-        #wish-container { max-height: 250px; overflow-y: auto; text-align: left; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin-top: 20px; }
-        .wish-item { border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding: 10px 0; }
-    </style>
+    /* Mobile */
+    @media (max-width: 600px) {
+      h1 { font-size: 32px; }
+      h2 { font-size: 18px; }
+      p { font-size: 14px; }
+    }
+  </style>
 </head>
-<body style="overflow: hidden;">
 
-    <audio id="weddingMusic" loop><source src="Lestari.mp3" type="audio/mpeg"></audio>
-    <div class="fog-container"><div class="fog-img"></div></div>
+<body>
 
-    <section id="opening">
-        <div data-aos="zoom-in" data-aos-duration="1500">
-            <h2 style="letter-spacing: 5px; font-size: 0.8rem; margin-bottom: 10px;">THE WEDDING OF</h2>
-            <h1 class="font-aesthetic" style="font-size: 4rem;">Trimono & Puji</h1>
-            <div style="margin: 30px 0;">
-                <p style="font-size: 0.8rem;">KEPADA YTH:</p>
-                <h3 id="guest-name" class="font-aesthetic" style="font-size: 2.5rem;">Tamu Undangan</h3>
-            </div>
-            <button onclick="startInvitation()" class="btn-gold">Buka Undangan</button>
-        </div>
-    </section>
+  <!-- Video (SUDAH ADA AUDIO DI DALAMNYA) -->
+  <video class="video-bg" autoplay muted loop id="bgVideo">
+    <source src="video.mp4" type="video/mp4">
+  </video>
 
-    <section class="content-page">
-        <div class="ornamen-page-top" data-aos="fade-down"></div>
-        <div class="glass-card" data-aos="fade-up">
-            <img src="ornamen-wayang.png" style="width: 100px; margin-bottom: 15px;">
-            <h2 class="font-aesthetic" style="font-size: 3.5rem;">Trimono & Puji</h2>
-            <p style="letter-spacing: 4px; font-weight: bold; margin: 15px 0;">KAMIS, 28 MEI 2028</p>
-            <p>Bertempat di Kediaman Mempelai Wanita</p>
-        </div>
-        <div class="ornamen-page-bottom" data-aos="fade-up"></div>
-    </section>
+  <div class="overlay"></div>
 
-    <section class="content-page">
-        <div class="ornamen-page-top"></div>
-        <div class="glass-card" data-aos="fade-right">
-            <img src="galeri2.jpg" class="circle-img">
-            <h3 style="color: var(--gold); font-size: 2rem;">Trimono, S.H</h3>
-            <p>Putra dari Bapak Saeno & Ibu Suwarni</p>
-        </div>
-        <div class="font-aesthetic" style="font-size: 3.5rem; margin: 10px 0;">&</div>
-        <div class="glass-card" data-aos="fade-left">
-            <img src="galeri3.jpg" class="circle-img">
-            <h3 style="color: var(--gold); font-size: 2rem;">Puji Rahayu</h3>
-            <p>Putri dari Ibu Sukinem (PB)</p>
-        </div>
-        <div class="ornamen-page-bottom"></div>
-    </section>
+  <!-- Musik tambahan (opsional, bisa dihapus kalau tidak mau) -->
+  <audio id="musik" loop>
+    <source src="musik.mp3" type="audio/mp3">
+  </audio>
 
-    <section class="content-page">
-        <div class="ornamen-page-top"></div>
-        <div class="glass-card" data-aos="flip-left">
-            <h3 class="font-aesthetic" style="font-size: 2.5rem; margin-bottom: 15px;">Lokasi Acara</h3>
-            <p>Ds. Tempuran, Dsn. Munggur, RT 02/RW 04</p>
-            <p>Kec. Paron, Kab. Ngawi, Jawa Timur</p>
-            <a href="https://maps.google.com" target="_blank" class="btn-gold">Buka Google Maps</a>
-        </div>
-        <div class="ornamen-page-bottom"></div>
-    </section>
+  <!-- Konten -->
+  <div class="content">
+    <h2>The Wedding Of</h2>
+    <h1>Trimono & Puji</h1>
+    <p>Sabtu, 10 Mei 2026</p>
 
-    <section class="content-page">
-        <div class="ornamen-page-top"></div>
-        <h2 class="font-aesthetic" style="font-size: 3rem; margin-bottom: 20px;">Gallery Foto</h2>
-        <div class="glass-card" data-aos="zoom-in">
-            <div class="gallery-grid">
-                <img src="galeri1.jpg">
-                <img src="galeri2.jpg">
-                <img src="galeri3.jpg">
-                <img src="galeri4.jpg">
-            </div>
-        </div>
-        <div class="ornamen-page-bottom"></div>
-    </section>
+    <button class="btn" onclick="bukaUndangan()">Buka Undangan</button>
+  </div>
 
-    <section class="content-page">
-        <div class="ornamen-page-top"></div>
-        <div class="glass-card" data-aos="zoom-in">
-            <h2 class="font-aesthetic" style="font-size: 3rem; margin-bottom: 20px;">Wedding Gift</h2>
-            <div class="bank-card">
-                <p id="bri-acc" style="font-weight: bold; font-size: 1.1rem;">6543-0102-XXXX-XXX</p>
-                <p style="font-size: 0.8rem; opacity: 0.8;">A/N TRIMONO (BRI)</p>
-                <button onclick="copyText('bri-acc')" class="btn-gold">Salin Rekening</button>
-            </div>
-            <div class="bank-card">
-                <p id="bni-acc" style="font-weight: bold; font-size: 1.1rem;">0987654321</p>
-                <p style="font-size: 0.8rem; opacity: 0.8;">A/N PUJI RAHAYU (BNI)</p>
-                <button onclick="copyText('bni-acc')" class="btn-gold">Salin Rekening</button>
-            </div>
-        </div>
-        <div class="ornamen-page-bottom"></div>
-    </section>
+  <script>
+    function bukaUndangan() {
+      // Aktifkan suara video
+      let video = document.getElementById("bgVideo");
+      video.muted = false;
+      video.play();
 
-    <section class="content-page">
-        <div class="ornamen-page-top"></div>
-        <div class="glass-card" data-aos="fade-up">
-            <h2 class="font-aesthetic" style="font-size: 2.5rem; margin-bottom: 20px;">Wedding Wishes</h2>
-            <input type="text" id="inputName" placeholder="Nama Anda" style="width:100%; padding:10px; margin-bottom:10px; background:rgba(255,255,255,0.1); border:1px solid var(--gold); color:white; border-radius: 8px;">
-            <textarea id="inputWish" placeholder="Ucapan doa restu..." rows="3" style="width:100%; padding:10px; margin-bottom:10px; background:rgba(255,255,255,0.1); border:1px solid var(--gold); color:white; border-radius: 8px;"></textarea>
-            <button onclick="sendWish()" class="btn-gold" style="width:100%">Kirim Ucapan</button>
-            <div id="wish-container"></div>
-        </div>
-        <div class="ornamen-page-bottom"></div>
-    </section>
+      // Jalankan musik tambahan (opsional)
+      let musik = document.getElementById("musik");
+      musik.play().catch(() => {});
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 1500, once: true });
+      // Hilangkan tombol (biar lebih elegan)
+      document.querySelector(".btn").style.display = "none";
+    }
+  </script>
 
-        const params = new URLSearchParams(window.location.search);
-        const to = params.get('to');
-        if(to) document.getElementById('guest-name').innerText = decodeURIComponent(to);
-
-        function startInvitation() {
-            document.getElementById('opening').style.transform = 'translateY(-100%)';
-            document.getElementById('weddingMusic').play();
-            document.body.style.overflow = "auto";
-        }
-
-        function copyText(id) {
-            const text = document.getElementById(id).innerText;
-            navigator.clipboard.writeText(text);
-            alert("Nomor rekening berhasil disalin!");
-        }
-
-        function sendWish() {
-            const name = document.getElementById('inputName').value;
-            const wish = document.getElementById('inputWish').value;
-            if(name && wish) {
-                const container = document.getElementById('wish-container');
-                container.innerHTML = `<div class="wish-item"><span style="font-weight:bold; color:#d4af37;">${name}</span><p style="font-size:0.9rem">${wish}</p></div>` + container.innerHTML;
-                document.getElementById('inputName').value = "";
-                document.getElementById('inputWish').value = "";
-            }
-        }
-    </script>
 </body>
 </html>
