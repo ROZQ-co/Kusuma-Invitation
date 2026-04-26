@@ -12,17 +12,18 @@
     <style>
         :root {
             --gold: #b08d57;
-            --cream-overlay: rgba(255, 255, 255, 0.85);
+            /* Putih gading transparan disesuaikan (0.85) agar Gunungan baru samar terlihat */
+            --cream-overlay: rgba(255, 255, 255, 0.85); 
         }
 
         body { 
             font-family: 'Montserrat', sans-serif; 
             overflow-x: hidden; 
             margin: 0;
-            background-color: #f4f1ea;
+            background-color: #1a1a1a; /* Warna dasar gelap agar gunungan menonjol */
         }
 
-        /* PERBAIKAN BACKGROUND AGAR TIDAK NGEZOOM DI HP */
+        /* ----- BACKGROUND UTAMA MENGGUNAKAN GUNUNGAN BARU & BERGERAK ----- */
         body::before {
             content: "";
             position: fixed;
@@ -30,9 +31,60 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/MuchaTseBle.jpg?raw=true') no-repeat center center;
+            /* Menggunakan file Wayang Gunungan baru dengan overlay gelap */
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/wayang%20gunugan.png?raw=true') no-repeat center center;
             background-size: cover;
+            z-index: -3;
+            /* Animasi bergerak pelan */
+            animation: gununganMotion 20s ease-in-out infinite;
+            filter: grayscale(20%);
+        }
+
+        /* KEYFRAME ANIMASI GUNUNGAN UTAMA */
+        @keyframes gununganMotion {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.08); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+
+        /* ----- WATERMARK GUNUNGAN DI BELAKANG TEKS ----- */
+        .gunungan-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: url('https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/wayang%20gunugan.png?raw=true') no-repeat center center;
+            background-size: contain;
+            width: 85%;
+            height: 85%;
+            opacity: 0.07; /* Sangat tipis sebagai pemanis */
             z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ----- 4 ORNAMEN SUDUT BERGERAK ----- */
+        .global-ornament {
+            position: fixed;
+            width: 140px;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0.9;
+            animation: floatingOrnament 6s ease-in-out infinite;
+        }
+
+        @media (min-width: 768px) {
+            .global-ornament { width: 220px; }
+        }
+
+        .top-left { top: -15px; left: -15px; }
+        .top-right { top: -15px; right: -15px; animation-delay: 1s; }
+        .bottom-left { bottom: -15px; left: -15px; animation-delay: 2s; }
+        .bottom-right { bottom: -15px; right: -15px; animation-delay: 3.5s; }
+
+        @keyframes floatingOrnament {
+            0% { transform: translate(0, 0px) rotate(var(--base-rot, 0deg)); }
+            50% { transform: translate(6px, 10px) rotate(calc(var(--base-rot, 0deg) + 2deg)); }
+            100% { transform: translate(0, 0px) rotate(var(--base-rot, 0deg)); }
         }
 
         .font-title { font-family: 'Cinzel', serif; }
@@ -40,40 +92,15 @@
         
         .content-card {
             background: var(--cream-overlay);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 20px;
             border: 1px solid rgba(176, 141, 87, 0.2);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             position: relative;
             z-index: 10;
+            overflow: hidden; /* Agar watermark gunungan tidak keluar batas */
         }
-
-        /* ORNAMEN BUNGA DI SETIAP SUDUT */
-        .corner-ornament {
-            position: absolute;
-            width: 100px;
-            z-index: 20;
-            pointer-events: none;
-            opacity: 0.9;
-        }
-        
-        @media (min-width: 768px) {
-            .corner-ornament { width: 160px; }
-        }
-
-        .top-right { top: -15px; right: -10px; }
-        .bottom-left { bottom: -15px; left: -10px; transform: rotate(180deg); }
-        .top-left { top: -15px; left: -10px; transform: rotate(270deg); }
-        .bottom-right { bottom: -15px; right: -10px; transform: rotate(90deg); }
-
-        @keyframes floating {
-            0% { transform: translate(0, 0px) rotate(var(--base-rot, 0deg)); }
-            50% { transform: translate(5px, 10px) rotate(calc(var(--base-rot, 0deg) + 3deg)); }
-            100% { transform: translate(0, 0px) rotate(var(--base-rot, 0deg)); }
-        }
-
-        .animate-ornament { animation: floating 6s ease-in-out infinite; }
 
         html { scroll-behavior: smooth; }
         
@@ -81,14 +108,14 @@
             position: fixed;
             inset: 0;
             z-index: 999;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri4.jpg?raw=true') center/cover no-repeat;
+            /* Background opening menggunakan gunungan baru statis dengan overlay pekat */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/wayang%20gunugan.png?raw=true') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: opacity 1s ease-out, visibility 1s;
         }
 
-        /* NOTIFIKASI BERHASIL SALIN */
         #toast {
             visibility: hidden;
             min-width: 250px;
@@ -103,15 +130,18 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 13px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
     </style>
 </head>
 <body class="text-gray-800">
+
+    <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/bunga-jawa.png?raw=true" class="global-ornament top-left" style="--base-rot: 270deg;">
+    <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/bunga-jawa.png?raw=true" class="global-ornament top-right" style="--base-rot: 0deg;">
+    <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/bunga-jawa.png?raw=true" class="global-ornament bottom-left" style="--base-rot: 180deg;">
+    <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/bunga-jawa.png?raw=true" class="global-ornament bottom-right" style="--base-rot: 90deg;">
 
     <div id="toast">Nomor Rekening Berhasil Disalin</div>
 
@@ -121,137 +151,69 @@
 
     <div id="opening-screen">
         <div class="text-center content-card p-10 m-5 shadow-2xl max-w-sm" data-aos="zoom-in">
-            <img src="bunga-jawa.png" class="corner-ornament top-right animate-ornament" style="--base-rot: 0deg;">
+            <div class="gunungan-watermark"></div>
             <h2 class="font-accent text-4xl mb-2 text-[#b08d57]">The Wedding of</h2>
             <h1 class="font-title text-3xl font-bold tracking-widest mb-4">TRIMONO & PUJI</h1>
             <div class="h-[1px] w-20 bg-[#b08d57] mx-auto mb-6"></div>
-            <p class="text-sm italic">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+            <p class="text-sm italic text-gray-600">Kepada Yth. Bapak/Ibu/Saudara/i</p>
             <h3 id="guest-name" class="text-xl font-bold my-3 text-gray-800">Tamu Undangan</h3>
-            <button onclick="startWedding()" class="mt-6 bg-[#b08d57] text-white px-10 py-3 rounded-full hover:bg-[#8e6f42] transition-all transform hover:scale-105 shadow-lg">
+            <button onclick="startWedding()" class="mt-6 bg-[#b08d57] text-white px-10 py-3 rounded-full hover:bg-[#8e6f42] transition-all transform hover:scale-105 shadow-lg relative z-20">
                 Buka Undangan
             </button>
-            <img src="bunga-jawa.png" class="corner-ornament bottom-left animate-ornament" style="--base-rot: 180deg;">
         </div>
     </div>
 
     <div id="main-content" class="max-w-md mx-auto relative min-h-screen">
         
         <section class="min-h-screen flex items-center justify-center p-6 relative">
-            <img src="bunga-jawa.png" class="corner-ornament top-right animate-ornament" style="--base-rot: 0deg;">
             <div class="content-card w-full p-10 text-center" data-aos="fade-up">
+                <div class="gunungan-watermark"></div>
                 <h2 class="font-title tracking-[0.4em] text-[10px] mb-10 text-[#b08d57]">WEDDING INVITATION</h2>
-                <div class="inline-block border-2 border-[#b08d57] rounded-full p-12 mb-8">
+                <div class="inline-block border-2 border-[#b08d57] rounded-full p-12 mb-8 relative z-20">
                     <h1 class="font-title text-5xl font-bold text-[#b08d57]">T/P</h1>
                 </div>
                 <h3 class="font-accent text-4xl mb-4 text-[#b08d57]">Trimono & Puji</h3>
                 <p class="font-semibold tracking-widest text-sm">28 . 05 . 2026</p>
             </div>
-            <img src="bunga-jawa.png" class="corner-ornament bottom-left animate-ornament" style="--base-rot: 180deg;">
-        </section>
-
-        <section class="py-16 px-6 relative">
-            <img src="bunga-jawa.png" class="corner-ornament top-left animate-ornament" style="--base-rot: 270deg;">
-            <div class="content-card p-8 text-center" data-aos="fade-up">
-                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri1.jpg?raw=true" class="w-full h-48 object-cover rounded-lg mb-6 shadow-md">
-                <h2 class="font-accent text-3xl text-[#b08d57] mb-4">Ar-Rum: 21</h2>
-                <p class="text-sm italic leading-relaxed text-gray-600">
-                    "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."
-                </p>
-            </div>
-            <img src="bunga-jawa.png" class="corner-ornament bottom-right animate-ornament" style="--base-rot: 90deg;">
         </section>
 
         <section class="py-12 px-6 relative">
-            <img src="bunga-jawa.png" class="corner-ornament top-right animate-ornament" style="--base-rot: 0deg;">
             <div class="content-card p-8 text-center space-y-10" data-aos="fade-up">
-                <div>
-                    <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri3.jpg?raw=true" class="w-32 h-32 rounded-full mx-auto border-4 border-[#b08d57] object-cover p-1 shadow-lg">
-                    <h3 class="font-accent text-4xl mt-4 text-[#b08d57]">Puji Rahayu</h3>
-                    <p class="text-xs mt-2 font-medium text-gray-600">Putri dari Ibu Sukinem (PB)</p>
+                <div class="gunungan-watermark"></div>
+                <div class="relative z-20">
+                    <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri3.jpg?raw=true" class="w-32 h-32 rounded-full mx-auto border-4 border-[#b08d57] object-cover shadow-lg">
+                    <h3 class="font-accent text-4xl mt-4 text-[#b08d57]">Puji Rahayu, S.M</h3>
+                    <p class="text-xs mt-2 font-medium">Putri dari Ibu Sukinem (PB)</p>
                 </div>
-                <div class="font-accent text-5xl text-[#b08d57] opacity-50">&</div>
-                <div>
-                    <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri2.jpg?raw=true" class="w-32 h-32 rounded-full mx-auto border-4 border-[#b08d57] object-cover p-1 shadow-lg">
+                <div class="font-accent text-5xl text-[#b08d57] opacity-50 relative z-20">&</div>
+                <div class="relative z-20">
+                    <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri2.jpg?raw=true" class="w-32 h-32 rounded-full mx-auto border-4 border-[#b08d57] object-cover shadow-lg">
                     <h3 class="font-accent text-4xl mt-4 text-[#b08d57]">Trimono, S.M, MBA</h3>
-                    <p class="text-xs mt-2 font-medium text-gray-600">Putra dari Bapak Saeno<br>& Ibu Suwarni</p>
+                    <p class="text-xs mt-2 font-medium">Putra dari Bapak Saeno<br>& Ibu Suwarni</p>
                 </div>
             </div>
-            <img src="bunga-jawa.png" class="corner-ornament bottom-left animate-ornament" style="--base-rot: 180deg;">
         </section>
 
         <section class="py-12 px-6 relative">
-            <img src="bunga-jawa.png" class="corner-ornament top-left animate-ornament" style="--base-rot: 270deg;">
             <div class="content-card p-8 text-center" data-aos="fade-up">
-                <h2 class="font-title text-2xl mb-4 text-[#b08d57]">Wedding Gift</h2>
-                <p class="text-xs mb-8 text-gray-600">Terima kasih atas doa restunya. Jika ingin memberikan tanda kasih, silakan melalui rekening di bawah ini:</p>
-                
-                <div class="space-y-4">
-                    <div class="bg-white/50 p-4 rounded-xl border border-[#b08d57]/20 shadow-sm">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg" class="h-6 mx-auto mb-2">
-                        <p class="font-bold text-sm" id="rek-bca">1234567890</p>
-                        <p class="text-[10px] uppercase mb-2">A/N Trimono</p>
-                        <button onclick="copyToClipboard('rek-bca')" class="text-[10px] bg-[#b08d57] text-white px-4 py-1 rounded-full hover:bg-black transition">Salin Rekening</button>
-                    </div>
-
-                    <div class="bg-white/50 p-4 rounded-xl border border-[#b08d57]/20 shadow-sm">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg" class="h-5 mx-auto mb-2">
-                        <p class="font-bold text-sm" id="rek-mandiri">9876543210123</p>
-                        <p class="text-[10px] uppercase mb-2">A/N Puji Rahayu</p>
-                        <button onclick="copyToClipboard('rek-mandiri')" class="text-[10px] bg-[#b08d57] text-white px-4 py-1 rounded-full hover:bg-black transition">Salin Rekening</button>
-                    </div>
-
-                    <div class="bg-white/50 p-4 rounded-xl border border-[#b08d57]/20 shadow-sm">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_Logo.svg" class="h-5 mx-auto mb-2">
-                        <p class="font-bold text-sm" id="rek-bri">002101234567890</p>
-                        <p class="text-[10px] uppercase mb-2">A/N Trimono</p>
-                        <button onclick="copyToClipboard('rek-bri')" class="text-[10px] bg-[#b08d57] text-white px-4 py-1 rounded-full hover:bg-black transition">Salin Rekening</button>
-                    </div>
-                </div>
-            </div>
-            <img src="bunga-jawa.png" class="corner-ornament bottom-right animate-ornament" style="--base-rot: 90deg;">
-        </section>
-
-        <section class="py-12 px-6 relative">
-            <img src="bunga-jawa.png" class="corner-ornament top-right animate-ornament" style="--base-rot: 0deg;">
-            <div class="content-card p-8 text-center" data-aos="fade-up">
+                <div class="gunungan-watermark"></div>
                 <h2 class="font-title text-2xl mb-8 text-[#b08d57]">Save The Date</h2>
-                <div class="grid grid-cols-1 gap-6 mb-8">
+                <div class="grid grid-cols-1 gap-6 mb-8 text-sm relative z-20">
                     <div class="border-b border-[#b08d57]/30 pb-4">
-                        <p class="font-bold text-[#b08d57] tracking-widest mb-1">AKAD NIKAH</p>
-                        <p class="text-sm">Pukul 07:00 - 12:00 WIB</p>
+                        <p class="font-bold text-[#b08d57] tracking-widest">AKAD NIKAH</p>
+                        <p>Pukul 07:00 - 12:00 WIB</p>
                     </div>
                     <div>
-                        <p class="font-bold text-[#b08d57] tracking-widest mb-1">RESEPSI</p>
-                        <p class="text-sm">Pukul 07:00 - Selesai</p>
+                        <p class="font-bold text-[#b08d57] tracking-widest">RESEPSI</p>
+                        <p>Pukul 07:00 - Selesai</p>
                     </div>
-                </div>
-                <div class="space-y-3">
-                    <div class="rounded-xl overflow-hidden border border-[#b08d57]/20 shadow-inner">
-                        <iframe class="w-full h-48" src="https://maps.app.goo.gl/Cs7BfkYsZtuZkNWt7" style="border:0;" loading="lazy"></iframe>
-                    </div>
-                </div>
-            </div>
-            <img src="bunga-jawa.png" class="corner-ornament bottom-left animate-ornament" style="--base-rot: 180deg;">
-        </section>
-
-        <section class="py-12 px-6 relative">
-            <div class="content-card p-8" data-aos="fade-up">
-                <img src="bunga-jawa.png" class="corner-ornament top-right animate-ornament" style="--base-rot: 0deg; width: 80px;">
-                <h2 class="font-title text-xl text-center mb-6 text-[#b08d57]">Konfirmasi</h2>
-                <div class="space-y-4">
-                    <input type="text" placeholder="Nama Lengkap" class="w-full p-3 rounded-lg bg-white/60 text-sm border-none shadow-inner">
-                    <select class="w-full p-3 rounded-lg bg-white/60 text-sm border-none shadow-inner">
-                        <option value="ya">Ya, Saya Akan Hadir</option>
-                        <option value="tidak">Maaf, Berhalangan Hadir</option>
-                    </select>
-                    <button class="w-full bg-[#b08d57] text-white py-3 rounded-lg font-semibold shadow-lg hover:bg-[#8e6f42] transition">Kirim Konfirmasi</button>
                 </div>
             </div>
         </section>
 
         <section class="py-12 px-6 relative text-center">
-            <h2 class="font-title text-2xl mb-8 text-[#b08d57]">Our Gallery</h2>
-            <div class="grid grid-cols-2 gap-3" data-aos="zoom-in">
+            <h2 class="font-title text-2xl mb-8 text-[#b08d57] drop-shadow-md relative z-20">Our Gallery</h2>
+            <div class="grid grid-cols-2 gap-3 relative z-20" data-aos="zoom-in">
                 <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri4.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow-md">
                 <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri3.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow-md">
                 <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri2.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow-md">
@@ -259,14 +221,58 @@
             </div>
         </section>
 
-        <section class="py-24 px-6 text-center relative">
-            <img src="bunga-jawa.png" class="corner-ornament top-right animate-ornament" style="--base-rot: 0deg;">
-            <div class="content-card p-10" data-aos="zoom-in">
-                <p class="text-sm italic mb-8 leading-relaxed text-gray-600">"Merupakan suatu kehormatan apabila Bapak/Ibu berkenan hadir untuk memberikan doa restu."</p>
-                <h2 class="font-accent text-5xl text-[#b08d57] mb-2">Trimono & Puji</h2>
-                <p class="font-title text-[10px] tracking-widest mt-10 opacity-50">Kusuma Invitation</p>
+        <section class="py-12 px-6 relative">
+            <div class="content-card p-8 text-center" data-aos="fade-up">
+                <div class="gunungan-watermark"></div>
+                <h2 class="font-title text-2xl mb-4 text-[#b08d57]">Wedding Gift</h2>
+                <p class="text-xs mb-8 text-gray-600 relative z-20">Terima kasih atas doa restunya.</p>
+                
+                <div class="space-y-4 relative z-20">
+                    <div class="bg-white/40 p-4 rounded-xl border border-[#b08d57]/20 shadow-sm">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg" class="h-6 mx-auto mb-2" alt="BCA">
+                        <p class="font-bold text-sm" id="rek-bca">1234567890</p>
+                        <p class="text-[10px] uppercase mb-2">A/N Trimono</p>
+                        <button onclick="copyToClipboard('rek-bca')" class="text-[10px] bg-[#b08d57] text-white px-4 py-1 rounded-full relative z-30">Salin Rekening</button>
+                    </div>
+
+                    <div class="bg-white/40 p-4 rounded-xl border border-[#b08d57]/20 shadow-sm">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg" class="h-5 mx-auto mb-2" alt="Mandiri">
+                        <p class="font-bold text-sm" id="rek-mandiri">9876543210123</p>
+                        <p class="text-[10px] uppercase mb-2">A/N Puji Rahayu</p>
+                        <button onclick="copyToClipboard('rek-mandiri')" class="text-[10px] bg-[#b08d57] text-white px-4 py-1 rounded-full relative z-30">Salin Rekening</button>
+                    </div>
+
+                    <div class="bg-white/40 p-4 rounded-xl border border-[#b08d57]/20 shadow-sm">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_Logo.svg" class="h-5 mx-auto mb-2" alt="BRI">
+                        <p class="font-bold text-sm" id="rek-bri">002101234567890</p>
+                        <p class="text-[10px] uppercase mb-2">A/N Trimono</p>
+                        <button onclick="copyToClipboard('rek-bri')" class="text-[10px] bg-[#b08d57] text-white px-4 py-1 rounded-full relative z-30">Salin Rekening</button>
+                    </div>
+                </div>
             </div>
-            <img src="bunga-jawa.png" class="corner-ornament bottom-left animate-ornament" style="--base-rot: 180deg;">
+        </section>
+
+        <section class="py-12 px-6 relative">
+            <div class="content-card p-8" data-aos="fade-up">
+                <h2 class="font-title text-xl text-center mb-6 text-[#b08d57]">Konfirmasi</h2>
+                <div class="space-y-4 relative z-20">
+                    <input type="text" placeholder="Nama Lengkap" class="w-full p-3 rounded-lg bg-white/60 text-sm border border-gray-200 shadow-inner">
+                    <select class="w-full p-3 rounded-lg bg-white/60 text-sm border border-gray-200 shadow-inner">
+                        <option value="ya">Ya, Saya Hadir</option>
+                        <option value="tidak">Maaf, Tidak Hadir</option>
+                    </select>
+                    <button class="w-full bg-[#b08d57] text-white py-3 rounded-lg font-semibold shadow-lg relative z-30 hover:bg-[#8e6f42] transition">Kirim Konfirmasi</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 px-6 text-center relative">
+            <div class="content-card p-10" data-aos="zoom-in">
+                <div class="gunungan-watermark"></div>
+                <p class="text-sm italic mb-8 relative z-20">"Merupakan suatu kehormatan apabila Bapak/Ibu berkenan hadir."</p>
+                <h2 class="font-accent text-5xl text-[#b08d57] mb-2 relative z-20">Trimono & Puji</h2>
+                <p class="font-title text-[10px] tracking-widest mt-10 opacity-50 relative z-20">Kusuma Invitation</p>
+            </div>
         </section>
 
     </div>
@@ -275,17 +281,12 @@
     <script>
         AOS.init({ duration: 1200, once: true });
 
-        // FUNGSI NAMA TAMU DARI URL
         function getGuestName() {
             const urlParams = new URLSearchParams(window.location.search);
             const guestName = urlParams.get('to'); 
-            const nameDisplay = document.getElementById('guest-name');
-            if (guestName) {
-                nameDisplay.innerText = decodeURIComponent(guestName.replace(/\+/g, ' '));
-            }
+            if (guestName) document.getElementById('guest-name').innerText = decodeURIComponent(guestName.replace(/\+/g, ' '));
         }
 
-        // FUNGSI COPY NOMOR REKENING
         function copyToClipboard(id) {
             const text = document.getElementById(id).innerText;
             navigator.clipboard.writeText(text).then(() => {
@@ -297,18 +298,14 @@
 
         window.addEventListener('DOMContentLoaded', getGuestName);
 
-        // FUNGSI BUKA UNDANGAN
         function startWedding() {
             const music = document.getElementById("weddingMusic");
-            music.play().catch(e => console.log("Musik butuh interaksi user"));
-            
-            const opening = document.getElementById("opening-screen");
-            opening.style.opacity = "0";
-            setTimeout(() => { opening.style.visibility = "hidden"; }, 1000);
+            music.play().catch(() => {});
+            document.getElementById("opening-screen").style.opacity = "0";
+            setTimeout(() => { document.getElementById("opening-screen").style.visibility = "hidden"; }, 1000);
             document.body.style.overflow = "auto";
         }
 
-        // Kunci scroll sebelum dibuka
         document.body.style.overflow = "hidden";
     </script>
 </body>
