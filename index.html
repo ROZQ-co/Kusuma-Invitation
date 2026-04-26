@@ -22,7 +22,7 @@
             background-color: #f4f1ea;
         }
 
-        /* FIX BACKGROUND UNTUK HP & LAPTOP */
+        /* PERBAIKAN BACKGROUND AGAR TIDAK NGEZOOM DI HP */
         body::before {
             content: "";
             position: fixed;
@@ -30,11 +30,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* Menggunakan gambar MuchaTseBle.jpg sebagai background utama */
             background: url('https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/MuchaTseBle.jpg?raw=true') no-repeat center center;
             background-size: cover;
             z-index: -1;
-            will-change: transform;
         }
 
         .font-title { font-family: 'Cinzel', serif; }
@@ -51,6 +49,7 @@
             z-index: 10;
         }
 
+        /* ORNAMEN BUNGA DI SETIAP SUDUT */
         .corner-ornament {
             position: absolute;
             width: 100px;
@@ -89,10 +88,32 @@
             transition: opacity 1s ease-out, visibility 1s;
         }
 
-        input, select, textarea { border: 1px solid rgba(176, 141, 87, 0.3) !important; outline: none; }
+        /* NOTIFIKASI BERHASIL SALIN */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 50px;
+            padding: 12px;
+            position: fixed;
+            z-index: 1000;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
     </style>
 </head>
 <body class="text-gray-800">
+
+    <div id="toast">Nomor Rekening Berhasil Disalin</div>
 
     <audio id="weddingMusic" loop>
         <source src="Lestari.mp3" type="audio/mpeg">
@@ -131,10 +152,10 @@
         <section class="py-16 px-6 relative">
             <img src="bunga-jawa.png" class="corner-ornament top-left animate-ornament" style="--base-rot: 270deg;">
             <div class="content-card p-8 text-center" data-aos="fade-up">
-                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri1.jpg?raw=true" class="w-full h-48 object-cover rounded-lg mb-6 shadow-md" alt="Couple">
+                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri1.jpg?raw=true" class="w-full h-48 object-cover rounded-lg mb-6 shadow-md">
                 <h2 class="font-accent text-3xl text-[#b08d57] mb-4">Ar-Rum: 21</h2>
                 <p class="text-sm italic leading-relaxed text-gray-600">
-                    "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."
+                    "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."
                 </p>
             </div>
             <img src="bunga-jawa.png" class="corner-ornament bottom-right animate-ornament" style="--base-rot: 90deg;">
@@ -145,14 +166,14 @@
             <div class="content-card p-8 text-center space-y-10" data-aos="fade-up">
                 <div>
                     <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri3.jpg?raw=true" class="w-32 h-32 rounded-full mx-auto border-4 border-[#b08d57] object-cover p-1 shadow-lg">
-                    <h3 class="font-accent text-4xl mt-4 text-[#b08d57]">Puji Rahayu, S.M</h3>
-                    <p class="text-xs mt-2 font-medium">Putri dari Ibu Sukinem (PB)</p>
+                    <h3 class="font-accent text-4xl mt-4 text-[#b08d57]">Puji Rahayu</h3>
+                    <p class="text-xs mt-2 font-medium text-gray-600">Putri dari Ibu Sukinem (PB)</p>
                 </div>
                 <div class="font-accent text-5xl text-[#b08d57] opacity-50">&</div>
                 <div>
                     <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri2.jpg?raw=true" class="w-32 h-32 rounded-full mx-auto border-4 border-[#b08d57] object-cover p-1 shadow-lg">
                     <h3 class="font-accent text-4xl mt-4 text-[#b08d57]">Trimono, S.M, MBA</h3>
-                    <p class="text-xs mt-2 font-medium">Putra dari Bapak Saeno<br>& Ibu Suwarni</p>
+                    <p class="text-xs mt-2 font-medium text-gray-600">Putra dari Bapak Saeno<br>& Ibu Suwarni</p>
                 </div>
             </div>
             <img src="bunga-jawa.png" class="corner-ornament bottom-left animate-ornament" style="--base-rot: 180deg;">
@@ -160,6 +181,38 @@
 
         <section class="py-12 px-6 relative">
             <img src="bunga-jawa.png" class="corner-ornament top-left animate-ornament" style="--base-rot: 270deg;">
+            <div class="content-card p-8 text-center" data-aos="fade-up">
+                <h2 class="font-title text-2xl mb-4 text-[#b08d57]">Wedding Gift</h2>
+                <p class="text-xs mb-8 text-gray-600">Terima kasih atas doa restunya. Jika ingin memberikan tanda kasih, silakan melalui rekening di bawah ini:</p>
+                
+                <div class="space-y-4">
+                    <div class="bg-white/50 p-4 rounded-xl border border-[#b08d57]/20 shadow-sm">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg" class="h-6 mx-auto mb-2">
+                        <p class="font-bold text-sm" id="rek-bca">1234567890</p>
+                        <p class="text-[10px] uppercase mb-2">A/N Trimono</p>
+                        <button onclick="copyToClipboard('rek-bca')" class="text-[10px] bg-[#b08d57] text-white px-4 py-1 rounded-full hover:bg-black transition">Salin Rekening</button>
+                    </div>
+
+                    <div class="bg-white/50 p-4 rounded-xl border border-[#b08d57]/20 shadow-sm">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg" class="h-5 mx-auto mb-2">
+                        <p class="font-bold text-sm" id="rek-mandiri">9876543210123</p>
+                        <p class="text-[10px] uppercase mb-2">A/N Puji Rahayu</p>
+                        <button onclick="copyToClipboard('rek-mandiri')" class="text-[10px] bg-[#b08d57] text-white px-4 py-1 rounded-full hover:bg-black transition">Salin Rekening</button>
+                    </div>
+
+                    <div class="bg-white/50 p-4 rounded-xl border border-[#b08d57]/20 shadow-sm">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_Logo.svg" class="h-5 mx-auto mb-2">
+                        <p class="font-bold text-sm" id="rek-bri">002101234567890</p>
+                        <p class="text-[10px] uppercase mb-2">A/N Trimono</p>
+                        <button onclick="copyToClipboard('rek-bri')" class="text-[10px] bg-[#b08d57] text-white px-4 py-1 rounded-full hover:bg-black transition">Salin Rekening</button>
+                    </div>
+                </div>
+            </div>
+            <img src="bunga-jawa.png" class="corner-ornament bottom-right animate-ornament" style="--base-rot: 90deg;">
+        </section>
+
+        <section class="py-12 px-6 relative">
+            <img src="bunga-jawa.png" class="corner-ornament top-right animate-ornament" style="--base-rot: 0deg;">
             <div class="content-card p-8 text-center" data-aos="fade-up">
                 <h2 class="font-title text-2xl mb-8 text-[#b08d57]">Save The Date</h2>
                 <div class="grid grid-cols-1 gap-6 mb-8">
@@ -173,12 +226,12 @@
                     </div>
                 </div>
                 <div class="space-y-3">
-                    <div class="rounded-xl overflow-hidden border border-[#b08d57]/20">
+                    <div class="rounded-xl overflow-hidden border border-[#b08d57]/20 shadow-inner">
                         <iframe class="w-full h-48" src="https://maps.app.goo.gl/Cs7BfkYsZtuZkNWt7" style="border:0;" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
-            <img src="bunga-jawa.png" class="corner-ornament bottom-right animate-ornament" style="--base-rot: 90deg;">
+            <img src="bunga-jawa.png" class="corner-ornament bottom-left animate-ornament" style="--base-rot: 180deg;">
         </section>
 
         <section class="py-12 px-6 relative">
@@ -186,30 +239,30 @@
                 <img src="bunga-jawa.png" class="corner-ornament top-right animate-ornament" style="--base-rot: 0deg; width: 80px;">
                 <h2 class="font-title text-xl text-center mb-6 text-[#b08d57]">Konfirmasi</h2>
                 <div class="space-y-4">
-                    <input type="text" placeholder="Nama Lengkap" class="w-full p-3 rounded-lg bg-white/60 text-sm">
-                    <select class="w-full p-3 rounded-lg bg-white/60 text-sm">
-                        <option value="ya">Ya, Saya Hadir</option>
-                        <option value="tidak">Maaf, Tidak Bisa</option>
+                    <input type="text" placeholder="Nama Lengkap" class="w-full p-3 rounded-lg bg-white/60 text-sm border-none shadow-inner">
+                    <select class="w-full p-3 rounded-lg bg-white/60 text-sm border-none shadow-inner">
+                        <option value="ya">Ya, Saya Akan Hadir</option>
+                        <option value="tidak">Maaf, Berhalangan Hadir</option>
                     </select>
-                    <button class="w-full bg-[#b08d57] text-white py-3 rounded-lg font-semibold">Kirim</button>
+                    <button class="w-full bg-[#b08d57] text-white py-3 rounded-lg font-semibold shadow-lg hover:bg-[#8e6f42] transition">Kirim Konfirmasi</button>
                 </div>
             </div>
         </section>
 
-        <section class="py-12 px-6 relative">
-            <h2 class="font-title text-2xl text-center mb-8 text-[#b08d57]">Gallery</h2>
+        <section class="py-12 px-6 relative text-center">
+            <h2 class="font-title text-2xl mb-8 text-[#b08d57]">Our Gallery</h2>
             <div class="grid grid-cols-2 gap-3" data-aos="zoom-in">
-                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri4.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow">
-                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri3.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow">
-                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri2.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow">
-                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri1.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow">
+                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri4.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow-md">
+                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri3.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow-md">
+                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri2.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow-md">
+                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri1.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow-md">
             </div>
         </section>
 
         <section class="py-24 px-6 text-center relative">
             <img src="bunga-jawa.png" class="corner-ornament top-right animate-ornament" style="--base-rot: 0deg;">
             <div class="content-card p-10" data-aos="zoom-in">
-                <p class="text-sm italic mb-8 leading-relaxed">"Merupakan suatu kehormatan apabila Bapak/Ibu berkenan hadir untuk memberikan doa restu."</p>
+                <p class="text-sm italic mb-8 leading-relaxed text-gray-600">"Merupakan suatu kehormatan apabila Bapak/Ibu berkenan hadir untuk memberikan doa restu."</p>
                 <h2 class="font-accent text-5xl text-[#b08d57] mb-2">Trimono & Puji</h2>
                 <p class="font-title text-[10px] tracking-widest mt-10 opacity-50">Kusuma Invitation</p>
             </div>
@@ -222,6 +275,7 @@
     <script>
         AOS.init({ duration: 1200, once: true });
 
+        // FUNGSI NAMA TAMU DARI URL
         function getGuestName() {
             const urlParams = new URLSearchParams(window.location.search);
             const guestName = urlParams.get('to'); 
@@ -231,11 +285,22 @@
             }
         }
 
+        // FUNGSI COPY NOMOR REKENING
+        function copyToClipboard(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById("toast");
+                toast.className = "show";
+                setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+            });
+        }
+
         window.addEventListener('DOMContentLoaded', getGuestName);
 
+        // FUNGSI BUKA UNDANGAN
         function startWedding() {
-            const audio = document.getElementById("weddingMusic");
-            audio.play().catch(() => console.log("Audio play failed"));
+            const music = document.getElementById("weddingMusic");
+            music.play().catch(e => console.log("Musik butuh interaksi user"));
             
             const opening = document.getElementById("opening-screen");
             opening.style.opacity = "0";
@@ -243,6 +308,7 @@
             document.body.style.overflow = "auto";
         }
 
+        // Kunci scroll sebelum dibuka
         document.body.style.overflow = "hidden";
     </script>
 </body>
