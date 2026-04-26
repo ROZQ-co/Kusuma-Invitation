@@ -1,147 +1,280 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Undangan Pernikahan</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Diana & Hengki</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #b08d57;
+            --cream-overlay: rgba(255, 255, 255, 0.85);
+        }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            overflow-x: hidden; 
+            margin: 0;
+        }
 
-    body, html {
-      height: 100%;
-      overflow: hidden;
-    }
+        .font-title { font-family: 'Cinzel', serif; }
+        .font-accent { font-family: 'Great Vibes', cursive; }
+        
+        /* Background Utama */
+        .main-bg {
+            background: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80') no-repeat center center fixed;
+            background-size: cover;
+        }
 
-    /* Video Background */
-    .video-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      min-height: 100%;
-      object-fit: cover;
-      z-index: -1;
-      transition: 1s;
-    }
+        /* Overlay Transparan per Section */
+        .content-card {
+            background: var(--cream-overlay);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid rgba(176, 141, 87, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
 
-    /* Overlay gelap */
-    .overlay {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-    }
+        /* Ornamen Dekorasi */
+        .corner-ornament {
+            position: absolute;
+            width: 180px;
+            z-index: 20;
+            pointer-events: none;
+        }
+        .top-right { top: 0; right: 0; }
+        .bottom-left { bottom: 0; left: 0; transform: rotate(180deg); }
 
-    /* Konten */
-    .content {
-      position: relative;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
+        /* KEYFRAMES ANIMASI ORNAMEN */
+        @keyframes floating {
+            0% { transform: translate(0, 0px) rotate(0deg); }
+            50% { transform: translate(8px, 15px) rotate(3deg); }
+            100% { transform: translate(0, -0px) rotate(0deg); }
+        }
 
-    h2 {
-      font-size: 22px;
-      letter-spacing: 2px;
-      animation: fadeIn 2s ease;
-    }
+        @keyframes softPulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.03); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
 
-    h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 45px;
-      margin: 10px 0;
-      animation: fadeIn 3s ease;
-    }
+        .animate-ornament {
+            animation: floating 6s ease-in-out infinite;
+        }
 
-    p {
-      font-size: 16px;
-      margin-bottom: 25px;
-      animation: fadeIn 4s ease;
-    }
+        .animate-pulse-slow {
+            animation: softPulse 5s ease-in-out infinite;
+        }
 
-    /* Tombol */
-    .btn {
-      padding: 12px 30px;
-      background: #c59d5f;
-      border: none;
-      color: white;
-      font-size: 16px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+        /* Smooth Scroll */
+        html { scroll-behavior: smooth; }
+        
+        /* Screen Opening */
+        #opening-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://pin.it/115yvq3fK') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease-out, visibility 1s;
+        }
 
-    .btn:hover {
-      background: #a67c3c;
-    }
-
-    /* Animasi */
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    /* Mobile */
-    @media (max-width: 600px) {
-      h1 { font-size: 32px; }
-      h2 { font-size: 18px; }
-      p { font-size: 14px; }
-    }
-  </style>
+        /* Input Custom Style */
+        input, select, textarea {
+            border: 1px solid rgba(176, 141, 87, 0.3) !important;
+            outline: none;
+        }
+        input:focus { border-color: var(--gold) !important; }
+    </style>
 </head>
+<body class="main-bg text-gray-800">
 
-<body>
+    <audio id="weddingMusic" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
 
-  <!-- Video (SUDAH ADA AUDIO DI DALAMNYA) -->
-  <video class="video-bg" autoplay muted loop id="bgVideo">
-    <source src="video.mp4" type="video/mp4">
-  </video>
+    <div id="opening-screen">
+        <div class="text-center content-card p-10 m-5 shadow-2xl max-w-sm" data-aos="zoom-in">
+            <h2 class="font-accent text-4xl mb-2 text-[#b08d57]">The Wedding of</h2>
+            <h1 class="font-title text-3xl font-bold tracking-widest mb-4">TRIMONO & PUJI</h1>
+            <div class="h-[1px] w-20 bg-[#b08d57] mx-auto mb-6"></div>
+            <p class="text-sm italic">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+            <h3 class="text-xl font-bold my-3">Nama Tamu</h3>
+            <button onclick="startWedding()" class="mt-6 bg-[#b08d57] text-white px-10 py-3 rounded-full hover:bg-[#8e6f42] transition-all transform hover:scale-105 shadow-lg">
+                Buka Undangan
+            </button>
+        </div>
+    </div>
 
-  <div class="overlay"></div>
+    <div id="main-content" class="max-w-md mx-auto relative min-h-screen">
+        
+        <section class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+            <img src="bunga-jawa.png" class="corner-ornament top-right animate-ornament" style="animation-delay: 0s;">
+            
+            <div class="content-card w-full p-10 text-center relative z-10" data-aos="fade-up">
+                <h2 class="font-title tracking-[0.4em] text-[10px] mb-10 text-[#b08d57]">WEDDING INVITATION</h2>
+                <div class="inline-block border-2 border-[#b08d57] rounded-full p-12 mb-8 animate-pulse-slow">
+                    <h1 class="font-title text-5xl font-bold text-[#b08d57]">D/H</h1>
+                </div>
+                <h3 class="font-accent text-4xl mb-4 text-[#b08d57]">Diana & Hengki</h3>
+                <p class="font-semibold tracking-widest text-sm">28 . 05 . 2026</p>
+            </div>
 
-  <!-- Musik tambahan (opsional, bisa dihapus kalau tidak mau) -->
-  <audio id="musik" loop>
-    <source src="musik.mp3" type="audio/mp3">
-  </audio>
+            <img src="bunga-jawa.png" class="corner-ornament bottom-left animate-ornament" style="animation-delay: 2s;">
+        </section>
 
-  <!-- Konten -->
-  <div class="content">
-    <h2>The Wedding Of</h2>
-    <h1>Trimono & Puji</h1>
-    <p>Sabtu, 10 Mei 2026</p>
+        <section class="py-16 px-6">
+            <div class="content-card p-8 text-center" data-aos="fade-up">
+                <img src=https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri1.jpg?raw=true" class="w-full h-48 object-cover rounded-lg mb-6 shadow-md" alt="Couple">
+                <h2 class="font-accent text-3xl text-[#b08d57] mb-4">Ar-Rum: 21</h2>
+                <p class="text-sm italic leading-relaxed text-gray-600">
+                    "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."
+                </p>
+            </div>
+        </section>
 
-    <button class="btn" onclick="bukaUndangan()">Buka Undangan</button>
-  </div>
+        <section class="py-12 px-6">
+            <div class="content-card p-8 text-center space-y-10" data-aos="fade-up">
+                <div data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://i.pravatar.cc/150?u=diana" class="w-32 h-32 rounded-full mx-auto border-4 border-[#b08d57] object-cover p-1 shadow-lg" alt="Puji">
+                    <h3 class="font-accent text-4xl mt-4 text-[#b08d57]">Puji Rahayu, MMgt (Fin)</h3>
+                    <p class="text-xs mt-2 font-medium">Putri dari Bapak Ir. Hanafi <br>& Ibu Almh. Arnen Suarti</p>
+                </div>
+                
+                <div class="font-accent text-5xl text-[#b08d57] opacity-50">&</div>
+                
+                <div data-aos="zoom-in" data-aos-delay="400">
+                    <img src="https://i.pravatar.cc/150?u=hengki" class="w-32 h-32 rounded-full mx-auto border-4 border-[#b08d57] object-cover p-1 shadow-lg" alt="Trimono">
+                    <h3 class="font-accent text-4xl mt-4 text-[#b08d57]">Trimono, S.M, MBA</h3>
+                    <p class="text-xs mt-2 font-medium">Putra dari Bapak Alm. KBP (P) H. Subagyo Hadi Saputro, SH <br>& Ibu Hj. Rina Mudinawati Rahayu</p>
+                </div>
+            </div>
+        </section>
 
-  <script>
-    function bukaUndangan() {
-      // Aktifkan suara video
-      let video = document.getElementById("bgVideo");
-      video.muted = false;
-      video.play();
+        <section class="py-12 px-6">
+            <div class="content-card p-8 text-center" data-aos="fade-up">
+                <h2 class="font-title text-2xl mb-6 text-[#b08d57]">Our Journey</h2>
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80" class="w-full h-56 object-cover rounded-xl mb-4 shadow-md" alt="Journey">
+                <p class="text-sm italic px-2">"Sejak pertama kali bertemu, kami tahu bahwa ini adalah awal dari selamanya."</p>
+            </div>
+        </section>
 
-      // Jalankan musik tambahan (opsional)
-      let musik = document.getElementById("musik");
-      musik.play().catch(() => {});
+        <section class="py-12 px-6">
+            <div class="content-card p-8 text-center" data-aos="fade-up">
+                <h2 class="font-title text-2xl mb-8 text-[#b08d57]">Save The Date</h2>
+                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri2.jpg?raw=true" class="w-full h-40 object-cover rounded-lg mb-6 shadow-sm">
+                
+                <div class="grid grid-cols-1 gap-6 mb-8">
+                    <div class="border-b border-[#b08d57]/30 pb-4">
+                        <p class="font-bold text-[#b08d57] tracking-widest mb-1">AKAD NIKAH</p>
+                        <p class="text-sm">Pukul 07:00 - 12:00 WIB</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-[#b08d57] tracking-widest mb-1">RESEPSI</p>
+                        <p class="text-sm">Pukul 07:00 - Selesai</p>
+                    </div>
+                </div>
 
-      // Hilangkan tombol (biar lebih elegan)
-      document.querySelector(".btn").style.display = "none";
-    }
-  </script>
+                <div class="space-y-3">
+                    <button class="w-full bg-[#b08d57] text-white py-2 rounded-full text-xs hover:bg-[#8e6f42] transition">Simpan ke Kalender</button>
+                    <div class="rounded-xl overflow-hidden shadow-inner border border-[#b08d57]/20">
+                        <iframe class="w-full h-48" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.27!2d106.8!3d-6.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTInMDAuMCJTIDEwNsKwNDgnMDAuMCJF!5e0!3m2!1sid!2sid!4v1620000000000" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="py-12 px-6">
+            <div class="content-card p-8" data-aos="fade-up">
+                <h2 class="font-title text-xl text-center mb-6 text-[#b08d57]">Konfirmasi Kehadiran</h2>
+                <div class="space-y-4">
+                    <input type="text" placeholder="Nama Lengkap" class="w-full p-3 rounded-lg bg-white/60 text-sm">
+                    <select class="w-full p-3 rounded-lg bg-white/60 text-sm">
+                        <option value="">Apakah Anda akan hadir?</option>
+                        <option value="ya">Ya, Saya Hadir</option>
+                        <option value="ragu">Masih Ragu</option>
+                        <option value="tidak">Maaf, Tidak Bisa Hadir</option>
+                    </select>
+                    <button class="w-full bg-[#b08d57] text-white py-3 rounded-lg shadow-md hover:shadow-xl transition-all font-semibold">Konfirmasi & Kirim Ucapan</button>
+                    <p class="text-[10px] text-center text-gray-500 mt-4">Batas akhir konfirmasi: 30 April 2025</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 px-6">
+            <h2 class="font-title text-2xl text-center mb-8 text-[#b08d57]">Our Gallery</h2>
+            <div class="grid grid-cols-2 gap-3" data-aos="zoom-in">
+                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri4.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow cursor-pointer hover:scale-105 transition" alt="Gal 1">
+                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri3.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow cursor-pointer hover:scale-105 transition" alt="Gal 2">
+                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri2.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow cursor-pointer hover:scale-105 transition" alt="Gal 3">
+                <img src="https://github.com/ROZQ-co/Kusuma-Invitation/blob/main/galeri1.jpg?raw=true" class="h-40 w-full object-cover rounded-lg shadow cursor-pointer hover:scale-105 transition" alt="Gal 4">
+            </div>
+        </section>
+
+        <section class="py-12 px-6">
+            <div class="content-card p-8" data-aos="fade-up">
+                <h2 class="font-title text-xl text-center mb-6 text-[#b08d57]">Wedding Wish</h2>
+                <div class="space-y-4">
+                    <input type="text" placeholder="Nama Anda" class="w-full p-3 rounded-lg bg-white/60 text-sm">
+                    <textarea rows="4" placeholder="Tulis ucapan & doa restu..." class="w-full p-3 rounded-lg bg-white/60 text-sm"></textarea>
+                    <button class="w-full bg-[#b08d57] text-white py-3 rounded-lg hover:bg-[#8e6f42] transition">Kirim Ucapan</button>
+                </div>
+                
+                <div class="mt-8 space-y-4 max-h-60 overflow-y-auto pr-2">
+                    <div class="p-3 rounded bg-white/40 border-l-4 border-[#b08d57]">
+                        <p class="text-[10px] font-bold">Kusuma Invitation</p>
+                        <p class="text-[11px] italic text-gray-600">"Selamat ya Diana & Hengki! Semoga sakinah mawaddah warahmah."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 px-6 text-center">
+            <div class="content-card p-10" data-aos="zoom-in">
+                <p class="text-sm italic mb-8 leading-relaxed">"Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai."</p>
+                <h2 class="font-accent text-5xl text-[#b08d57] mb-2">Trimono & Puji</h2>
+                <p class="font-title text-[10px] tracking-widest mt-10 opacity-50">SATUMOMEN.COM</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inisialisasi Animasi Scroll
+        AOS.init({ 
+            duration: 1200, 
+            once: true,
+            easing: 'ease-in-out'
+        });
+
+        function startWedding() {
+            // 1. Putar Musik
+            const music = document.getElementById("Lestari.mp3");
+            music.play().catch(error => {
+                console.log("Autoplay dicegah oleh browser, namun musik akan dicoba putar kembali.");
+            });
+            
+            // 2. Animasi Transisi Opening ke Main Content
+            const opening = document.getElementById("opening-screen");
+            opening.style.opacity = "0";
+            opening.style.visibility = "hidden";
+            
+            // 3. Pastikan scroll mulai dari paling atas
+            window.scrollTo(0, 0);
+
+            // 4. Izinkan Scroll setelah dibuka
+            document.body.style.overflow = "auto";
+        }
+
+        // Mencegah scroll saat opening masih aktif
+        document.body.style.overflow = "hidden";
+    </script>
 </body>
 </html>
